@@ -1,19 +1,38 @@
-const core = require('@actions/core');
-const wait = require('./wait');
+const core = require("@actions/core");
+const { GitHub, context } = require("@actions/github");
 
-
-// most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+    const github = new GitHub(process.env.GITHUB_TOKEN);
+    const { owner, repo } = context.repo;
+    const tag = core.getInput('tag');
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
+    const getReleaseResponse = await github.repos.getReleaseByTag({ owner, repo, tag });
 
-    core.setOutput('time', new Date().toTimeString());
+    const {
+      data: {
+        id: releaseId,
+        html_url: htmlUrl,
+        upload_url: uploadUrl,
+        name: name,
+        body: body,
+        draft: draft,
+        prerelease: prerelease
+      }
+    } = getReleaseResponse;
+
+    console.log(`Got release info: '${releaseId}', '${htmlUrl}', '${uploadUrl}', '${name}', '${draft}', '${prerelease}', '${body}'`);
+
+    core.setOutput("id", releaseId.toString());
+    core.setOutput("html_url", htmlUrl);
+    core.setOutput("upload_url", uploadUrl);
+    core.setOutput("tag_name", tag);
+    core.setOutput("name", name);
+    core.setOutput("body", body);
+    core.setOutput("draft", draft);
+    core.setOutput("prerelease", prerelease);
   } catch (error) {
+    console.log(error);
     core.setFailed(error.message);
   }
 }

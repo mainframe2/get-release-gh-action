@@ -1,13 +1,28 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'Get release data'
+description: 'Gets the data for the given release'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  tag:
+    description: The tag for which you want to get the release data.
     required: true
-    default: '1000'
+
 outputs:
-  time: # output will be available to future steps
-    description: 'The message to output'
+  id:
+    description: 'The ID of the release'
+  html_url:
+    description: 'The URL users can navigate to in order to view the release'
+  upload_url:
+    description: 'The URL for uploading assets to the release'
+  tag_name:
+    description: 'The git tag associated with the release.'
+  name:
+    description: 'The name of the release'
+  body:
+    description: 'The body of the release'
+  draft:
+    description: 'Whether this release is marked as a draft or not'
+  prerelease:
+    description: 'Whether this release is marked as a pre-release or not'
+
 runs:
   using: 'node12'
   main: 'dist/index.js'

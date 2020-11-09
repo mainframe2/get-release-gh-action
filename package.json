@@ -1,7 +1,7 @@
 {
-  "name": "javascript-action",
+  "name": "get-release-github-action",
   "version": "1.0.0",
-  "description": "JavaScript Action Template",
+  "description": "The Github action for getting a release with the given tag",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
@@ -18,14 +18,11 @@
     "Actions",
     "JavaScript"
   ],
-  "author": "",
+  "author": "Darko Vidaković",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
-  },
-  "homepage": "https://github.com/actions/javascript-action#readme",
   "dependencies": {
-    "@actions/core": "^1.2.5"
+    "@actions/core": "^1.2.5",
+    "@actions/github": "^4.0.0"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.24.0",
