@@ -1,9 +1,9 @@
 const core = require("@actions/core");
-const { GitHub, context } = require("@actions/github");
+const { getOctokit, context } = require("@actions/github");
 
 async function run() {
   try {
-    const github = new GitHub(process.env.GITHUB_TOKEN);
+    const github = getOctokit(process.env.GITHUB_TOKEN);
     const { owner, repo } = context.repo;
     const tag = core.getInput('tag');
 
