@@ -6,11 +6,11 @@ require('./sourcemap-register.js');module.exports =
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 const core = __webpack_require__(186);
-const { GitHub, context } = __webpack_require__(438);
+const { getOctokit, context } = __webpack_require__(438);
 
 async function run() {
   try {
-    const github = new GitHub(process.env.GITHUB_TOKEN);
+    const github = getOctokit(process.env.GITHUB_TOKEN);
     const { owner, repo } = context.repo;
     const tag = core.getInput('tag');
 
