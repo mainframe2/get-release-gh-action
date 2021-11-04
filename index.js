@@ -17,11 +17,12 @@ async function run() {
         name: name,
         body: body,
         draft: draft,
-        prerelease: prerelease
+        prerelease: prerelease,
+        assets,
       }
     } = getReleaseResponse;
 
-    console.log(`Got release info: '${releaseId}', '${htmlUrl}', '${uploadUrl}', '${name}', '${draft}', '${prerelease}', '${body}'`);
+    console.log(`Got release info: '${releaseId}', '${htmlUrl}', '${uploadUrl}', '${name}', '${draft}', '${prerelease}', '${body}', '${JSON.stringify(assets)}'`);
 
     core.setOutput("id", releaseId.toString());
     core.setOutput("html_url", htmlUrl);
@@ -31,6 +32,7 @@ async function run() {
     core.setOutput("body", body);
     core.setOutput("draft", draft);
     core.setOutput("prerelease", prerelease);
+    core.setOutput("assets", assets);
   } catch (error) {
     console.log(error);
     core.setFailed(error.message);
