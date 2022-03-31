@@ -6,7 +6,7 @@ The action is alomost identical to https://github.com/bruceadams/get-release wit
 Example usage:
 ```
 - name: Get release
-  uses: darko-vidakovic/get-release-github-action@main
+  uses: mainframe2/get-release-gh-action@main
   with:
     tag: v0.1.20
   env:
